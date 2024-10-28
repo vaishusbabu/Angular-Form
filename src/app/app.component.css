@@ -1,0 +1,66 @@
+body {
+  background-color: white;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #38444d;
+  display: flex; /* Flexbox for item alignment */
+  align-items: center;
+  justify-content: space-between; /* Distribute space between left and right sections */
+}
+
+li {
+  list-style: none;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-left {
+  display: flex; 
+}
+
+.nav-right {
+  display: flex; 
+  margin-left: auto; 
+}
+
+.grid-container {
+  display: inline-grid;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  flex: 1;
+  padding: 10px;
+}
+
+.column1 {
+  margin-top: -500px;
+  flex: 1;
+  padding: 10px;
+}
+
+.imgsrc {
+  max-width: 100%;
+  height: auto;
+}

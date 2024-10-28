@@ -1,0 +1,897 @@
+<div>
+ 
+  <div class="form-container">
+    <form #form="ngForm" (ngSubmit)="onSubmit()" class="main">
+      <h2 class="text-center">Patient Registration Form</h2>
+  
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="registrationDate">Registration Date:</label>
+              <input
+                [(ngModel)]="patient.registrationDate"
+                name="registrationDate"
+                type="date"
+                #registrationDate="ngModel"
+                id="registrationDate"
+                class="field"
+                required
+              />
+              <div
+                class="alert"
+                *ngIf="registrationDate.invalid && (registrationDate.dirty || registrationDate.touched)"
+              >
+                <div *ngIf="registrationDate.errors?.['required']">
+                  Registration Date is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="registrationTime">Time:</label>
+              <input
+                [(ngModel)]="patient.registrationTime"
+                #registrationTime="ngModel"
+                name="registrationTime"
+                type="time"
+                id="registrationTime"
+                class="field"
+                required
+              />
+              <div
+                class="alert"
+                *ngIf="registrationTime.invalid && (registrationTime.dirty || registrationTime.touched)"
+              >
+                <div *ngIf="registrationTime.errors?.['required']">
+                  Registration Time is required.
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="patientFirstName">Patient FirstName</label>
+            <input
+              type="text"
+              id="patientFirstName"
+              class="field"
+              [(ngModel)]="patient.patientFirstName"
+              name="patientFirstName"
+              #patientFirstName="ngModel"
+              placeholder="Enter first name"
+              minlength="4"
+              pattern="^[a-zA-Z]+$"
+              required
+            />
+            <div
+              class="alert"
+              *ngIf="
+                patientFirstName.invalid &&
+                (patientFirstName.dirty || patientFirstName.touched)
+              "
+            >
+              <div *ngIf="patientFirstName.errors?.['required']">
+                First name is required.
+              </div>
+              <div *ngIf="patientFirstName.errors?.['minlength']">
+                First name must be at least 4 characters long.
+              </div>
+              <div *ngIf="patientFirstName.errors?.['pattern']">
+                First name must contain only letters.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <label for="patientLastName"> LastName</label>
+            <input
+              type="text"
+              id="patientLastName"
+              class="field"
+              [(ngModel)]="patient.patientLastName"
+              name="patientLastName"
+              #patientLastName="ngModel"
+              placeholder="Enter Last name"
+              minlength="1"
+              pattern="^[a-zA-Z]+$"
+              required
+            />
+            <div
+              class="alert"
+              *ngIf="
+              patientLastName.invalid &&
+                (patientLastName.dirty || patientLastName.touched)
+              "
+            >
+              <div *ngIf="patientLastName.errors?.['required']">
+                Last name is required.
+              </div>
+              <div *ngIf="patientLastName.errors?.['minlength']">
+                Last name must be at least 1 characters long.
+              </div>
+              <div *ngIf="patientLastName.errors?.['pattern']">
+                Last name must contain only letters.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="sex">Sex</label>
+        <select
+          [(ngModel)]="patient.sex"
+          #sex="ngModel"
+          name="sex"
+          id="sex"
+          class="field"
+          required
+        >
+          <option value="" disabled>Select</option>
+          <option value="Male">Male</option>
+
+          <option value="Female">Female</option>
+          <option value="N/A">N/A</option>
+        </select>
+        <div class="alert" *ngIf="sex.invalid && (sex.dirty || sex.touched)">
+          <div *ngIf="sex.errors?.['required']">Sex is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthMonth">Birth Month</label>
+        <input
+          [(ngModel)]="patient.birthMonth"
+          #birthMonth="ngModel"
+          name="birthMonth"
+          type="number"
+          id="birthMonth"
+          min="1"
+          max="12"
+          class="field"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="birthMonth.invalid && (birthMonth.dirty || birthMonth.touched)"
+        >
+          <div *ngIf="birthMonth.errors?.['required']">
+            Birth Month is required.
+          </div>
+          <div *ngIf="birthMonth.errors?.['min']">
+            Birth Month cannot be less than 1.
+          </div>
+          <div *ngIf="birthMonth.errors?.['max']">
+            Birth Month cannot be greater than 12.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthDay">Birth Day:</label>
+        <input
+          [(ngModel)]="patient.birthDay"
+          #birthDay="ngModel"
+          name="birthDay"
+          type="number"
+          id="birthDay"
+          min="1"
+          max="31"
+          class="field"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="birthDay.invalid && (birthDay.dirty || birthDay.touched)"
+        >
+          <div *ngIf="birthDay.errors?.['required']">
+            Birth Day is required.
+          </div>
+          <div *ngIf="birthDay.errors?.['min']">
+            Birth Day cannot be less than 1.
+          </div>
+          <div *ngIf="birthDay.errors?.['max']">
+            Birth Day cannot be greater than 31.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="birthYear">Birth Year:</label>
+        <input
+          [(ngModel)]="patient.birthYear"
+          #birthYear="ngModel"
+          name="birthYear"
+          type="number"
+          id="birthYear"
+          min="1900"
+          max="2024"
+          class="field"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="birthYear.invalid && (birthYear.dirty || birthYear.touched)"
+        >
+          <div *ngIf="birthYear.errors?.['required']">
+            Birth Year is required.
+          </div>
+          <div *ngIf="birthYear.errors?.['min']">
+            Birth Year cannot be before 1900.
+          </div>
+          <div *ngIf="birthYear.errors?.['max']">
+            Birth Year cannot be greater than 2024.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number:</label>
+        <input
+          [(ngModel)]="patient.phoneNumber"
+          #phoneNumber="ngModel"
+          name="phoneNumber"
+          type="text"
+          id="phoneNumber"
+          class="field"
+          pattern="^\(\d{3}\) \d{3}-\d{4}$"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="
+            phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)
+          "
+        >
+          <div *ngIf="phoneNumber.errors?.['required']">
+            Phone Number is required.
+          </div>
+          <div *ngIf="phoneNumber.errors?.['pattern']">
+            Phone Number must follow the format (123) 456-7890.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          [(ngModel)]="patient.email"
+          #email="ngModel"
+          name="email"
+          type="email"
+          id="email"
+          class="field"
+          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="email.invalid && (email.dirty || email.touched)"
+        >
+          <div *ngIf="email.errors?.['required']">Email is required.</div>
+          <div *ngIf="email.errors?.['email']">Invalid email format.</div>
+          <div *ngIf="email.errors?.['pattern']">Email is Invalid.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          [(ngModel)]="patient.password"
+          #password="ngModel"
+          name="password"
+          type="password"
+          id="password"
+          class="field"
+          minlength="8"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
+          "
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="password.invalid && (password.dirty || password.touched)"
+        >
+          <div *ngIf="password.errors?.['required']">Password is required.</div>
+          <div *ngIf="password.errors?.['minlength']">
+            Password must be at least 8 characters long.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="streetAddress">Street Address</label>
+        <input
+          [(ngModel)]="patient.streetAddress"
+          #streetAddress="ngModel"
+          name="streetAddress"
+          type="text"
+          id="streetAddress"
+          class="field"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="
+            streetAddress.invalid &&
+            (streetAddress.dirty || streetAddress.touched)
+          "
+        >
+          <div *ngIf="streetAddress.errors?.['required']">
+            Street Address is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="streetAddressLine2">Street Address Line 2</label>
+        <input
+          [(ngModel)]="patient.streetAddressLine2"
+          name="streetAddressLine2"
+          type="text"
+          id="streetAddressLine2"
+          class="field"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          [(ngModel)]="patient.city"
+          #city="ngModel"
+          name="city"
+          type="text"
+          id="city"
+          class="field"
+          required
+        />
+        <div class="alert" *ngIf="city.invalid && (city.dirty || city.touched)">
+          <div *ngIf="city.errors?.['required']">City is required.</div>
+        </div>
+      </div>
+<!-- State/Province Field with Required Validation -->
+<div class="form-group">
+  <label for="stateOrProvince">State/Province</label>
+  <input
+    [(ngModel)]="patient.stateOrProvince"
+    name="stateOrProvince"
+    type="text"
+    id="stateOrProvince"
+    class="field"
+    required
+    minlength="2" 
+    maxlength="50" 
+    #stateOrProvince="ngModel"
+  />
+  <div
+    class="alert"
+    *ngIf="stateOrProvince.invalid && (stateOrProvince.dirty || stateOrProvince.touched)"
+  >
+    <div *ngIf="stateOrProvince.errors?.['required']">
+      State/Province is required.
+    </div>
+    <div *ngIf="stateOrProvince.errors?.['minlength']">
+      State/Province must be at least 2 characters long.
+    </div>
+    <div *ngIf="stateOrProvince.errors?.['maxlength']">
+      State/Province must be at most 50 characters long.
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="postalOrZipCode">Postal/Zip Code</label>
+  <input
+    [(ngModel)]="patient.postalOrZipCode"
+    name="postalOrZipCode"
+    type="text"
+    id="postalOrZipCode"
+    placeholder="Ex:123456"
+    class="field"
+    required
+    minlength="6"
+    maxlength="6"
+    pattern="^[0-9]{6}$" 
+    #postalOrZipCode="ngModel"
+  />
+  <div
+    class="alert"
+    *ngIf="postalOrZipCode.invalid && (postalOrZipCode.dirty || postalOrZipCode.touched)"
+  >
+    <div *ngIf="postalOrZipCode.errors?.['required']">
+      Postal/Zip Code is required.
+    </div>
+    <div *ngIf="postalOrZipCode.errors?.['minlength'] || postalOrZipCode.errors?.['maxlength']">
+      Postal/Zip Code must be exactly 6 digits.
+    </div>
+    <div *ngIf="postalOrZipCode.errors?.['pattern']">
+      Postal/Zip Code must contain only digits.
+    </div>
+  </div>
+</div>
+
+
+      <div class="form-group">
+        <label for="maritalStatus">Marital Status</label>
+        <select
+          [(ngModel)]="patient.maritalStatus"
+          #maritalStatus="ngModel"
+          name="maritalStatus"
+          id="maritalStatus"
+          class="field"
+          required
+        >
+          <option value="" disabled>Select</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Divorced">Divorced</option>
+          <option value="Widowed">Widowed</option>
+        </select>
+        <div
+          class="alert"
+          *ngIf="
+            maritalStatus.invalid &&
+            (maritalStatus.dirty || maritalStatus.touched)
+          "
+        >
+          <div *ngIf="maritalStatus.errors?.['required']">
+            Marital Status is required.
+          </div>
+        </div>
+      </div>
+
+      <h5>Emergency Contact</h5>
+      <div class="form-group">
+        <label for="emergencyContactFirstName"
+          >Emergency Contact First Name</label
+        >
+        <input
+          [(ngModel)]="patient.emergencyContactFirstName"
+          #emergencyContactFirstName="ngModel"
+          name="emergencyContactFirstName"
+          type="text"
+          id="emergencyContactFirstName"
+          class="field"
+          required
+        />
+        <div
+          class="alert"
+          *ngIf="
+            emergencyContactFirstName.invalid &&
+            (emergencyContactFirstName.dirty ||
+              emergencyContactFirstName.touched)
+          "
+        >
+          <div *ngIf="emergencyContactFirstName.errors?.['required']">
+            Emergency Contact First Name is required.
+          </div>
+        </div>
+      </div>
+
+   <!-- Emergency Contact Last Name Field with Validation -->
+<div class="form-group">
+  <label for="emergencyContactLastName">Emergency Contact Last Name</label>
+  <input
+    [(ngModel)]="patient.emergencyContactLastName"
+    #emergencyContactLastName="ngModel"
+    name="emergencyContactLastName"
+    type="text"
+    id="emergencyContactLastName"
+    class="field"
+    required
+    minlength="2"  
+    maxlength="50" 
+  />
+  <div
+    class="alert"
+    *ngIf="emergencyContactLastName.invalid && (emergencyContactLastName.dirty || emergencyContactLastName.touched)"
+  >
+    <div *ngIf="emergencyContactLastName.errors?.['required']">
+      Emergency Contact Last Name is required.
+    </div>
+    <div *ngIf="emergencyContactLastName.errors?.['minlength']">
+      Emergency Contact Last Name must be at least 2 characters long.
+    </div>
+    <div *ngIf="emergencyContactLastName.errors?.['maxlength']">
+      Emergency Contact Last Name must be at most 50 characters long.
+    </div>
+  </div>
+</div>
+
+<!-- Emergency Contact Relationship Field with Validation -->
+<div class="form-group">
+  <label for="emergencyContactRelationship">Emergency Contact Relationship</label>
+  <input
+    [(ngModel)]="patient.emergencyContactRelationship"
+    #emergencyContactRelationship="ngModel"
+    name="emergencyContactRelationship"
+    type="text"
+    id="emergencyContactRelationship"
+    class="field"
+    required
+    minlength="2"  
+    maxlength="50" 
+  />
+  <div
+    class="alert"
+    *ngIf="emergencyContactRelationship.invalid && (emergencyContactRelationship.dirty || emergencyContactRelationship.touched)"
+  >
+    <div *ngIf="emergencyContactRelationship.errors?.['required']">
+      Emergency Contact Relationship is required.
+    </div>
+    <div *ngIf="emergencyContactRelationship.errors?.['minlength']">
+      Emergency Contact Relationship must be at least 2 characters long.
+    </div>
+    <div *ngIf="emergencyContactRelationship.errors?.['maxlength']">
+      Emergency Contact Relationship must be at most 50 characters long.
+    </div>
+  </div>
+</div>
+
+      <div class="form-group">
+        <label for="emergencyContactPhoneNumber">Emergency Contact Phone Number</label>
+        <input
+          [(ngModel)]="patient.emergencyContactPhoneNumber"
+          name="emergencyContactPhoneNumber"
+          type="text"
+          id="emergencyContactPhoneNumber"
+          placeholder="(123) 456-7890"
+          class="field"
+          #emergencyContactPhoneNumber="ngModel"  
+          required
+          pattern="^\(\d{3}\) \d{3}-\d{4}$"
+        />
+        <div
+          class="alert"
+          *ngIf="
+            emergencyContactPhoneNumber.invalid &&
+            (emergencyContactPhoneNumber.dirty || emergencyContactPhoneNumber.touched)
+          "
+        >
+          <div *ngIf="emergencyContactPhoneNumber.errors?.['required']">
+            Emergency Contact Phone Number is required.
+          </div>
+          <div *ngIf="emergencyContactPhoneNumber.errors?.['pattern']">
+            Phone Number must follow the format (123) 456-7890.
+          </div>
+        </div>
+      </div>
+      
+<!-- #testing -->
+
+
+  <div class="col">
+    <div class="form-group">
+      <label for="familyDoctorFirstName">Family Doctor First Name:</label>
+      <input
+        type="text"
+        id="familyDoctorFirstName"
+        class="field"
+        [(ngModel)]="patient.familyDoctorFirstName"
+        name="familyDoctorFirstName"
+        #familyDoctorFirstName="ngModel"
+        placeholder="Enter first name"
+        required
+        maxlength="50"
+        pattern="[A-Za-z]+"
+      />
+      <div
+        class="alert"
+        *ngIf="familyDoctorFirstName.invalid && (familyDoctorFirstName.dirty || familyDoctorFirstName.touched)"
+      >
+        <div *ngIf="familyDoctorFirstName.errors?.['required']">
+          Family doctor first name is required.
+        </div>
+        <div *ngIf="familyDoctorFirstName.errors?.['pattern']">
+          Family doctor first name must contain only letters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="familyDoctorLastName">Family Doctor Last Name:</label>
+      <input
+        type="text"
+        id="familyDoctorLastName"
+        class="field"
+        [(ngModel)]="patient.familyDoctorLastName"
+        name="familyDoctorLastName"
+        #familyDoctorLastName="ngModel"
+        placeholder="Enter last name"
+        required
+        maxlength="10"
+        pattern="[A-Za-z]+"
+      />
+      <div
+        class="alert"
+        *ngIf="familyDoctorLastName.invalid && (familyDoctorLastName.dirty || familyDoctorLastName.touched)"
+      >
+        <div *ngIf="familyDoctorLastName.errors?.['required']">
+          Family doctor last name is required.
+        </div>
+        <div *ngIf="familyDoctorLastName.errors?.['pattern']">
+          Family doctor last name must contain only letters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="familyDoctorPhoneNumber">Family Doctor Phone Number:</label>
+      <input
+        type="tel"
+        id="familyDoctorPhoneNumber"
+        class="field"
+        [(ngModel)]="patient.familyDoctorPhoneNumber"
+        name="familyDoctorPhoneNumber"
+        #familyDoctorPhoneNumber="ngModel"
+        placeholder="(123) 456-7890"
+        required
+        pattern="^\(\d{3}\) \d{3}-\d{4}$"
+      />
+      <div
+        class="alert"
+        *ngIf="familyDoctorPhoneNumber.invalid && (familyDoctorPhoneNumber.dirty || familyDoctorPhoneNumber.touched)"
+      >
+        <div *ngIf="familyDoctorPhoneNumber.errors?.['required']">
+          Family doctor phone number is required.
+        </div>
+        <div *ngIf="familyDoctorPhoneNumber.errors?.['pattern']">
+          Family doctor phone number must be in the format (123) 456-7890.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="preferredPharmacy">Preferred Pharmacy:</label>
+      <input
+        type="text"
+        id="preferredPharmacy"
+        class="field"
+        [(ngModel)]="patient.preferredPharmacy"
+        name="preferredPharmacy"
+        #preferredPharmacy="ngModel"
+        placeholder="Enter preferred pharmacy"
+        required
+        maxlength="100"
+      />
+      <div
+        class="alert"
+        *ngIf="preferredPharmacy.invalid && (preferredPharmacy.dirty || preferredPharmacy.touched)"
+      >
+        <div *ngIf="preferredPharmacy.errors?.['required']">
+          Preferred pharmacy is required.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="pharmacyPhoneNumber">Pharmacy Phone Number:</label>
+      <input
+        type="tel"
+        id="pharmacyPhoneNumber"
+        class="field"
+        [(ngModel)]="patient.pharmacyPhoneNumber"
+        name="pharmacyPhoneNumber"
+        #pharmacyPhoneNumber="ngModel"
+        placeholder="(123) 456-7890"
+        required
+        pattern="^\(\d{3}\) \d{3}-\d{4}$"
+      />
+      <div
+        class="alert"
+        *ngIf="pharmacyPhoneNumber.invalid && (pharmacyPhoneNumber.dirty || pharmacyPhoneNumber.touched)"
+      >
+        <div *ngIf="pharmacyPhoneNumber.errors?.['required']">
+          Pharmacy phone number is required.
+        </div>
+        <div *ngIf="pharmacyPhoneNumber.errors?.['pattern']">
+          Pharmacy phone number must be in the format (123) 456-7890.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="reasonForRegistration">Reason for Registration:</label>
+      <textarea
+        id="reasonForRegistration"
+        class="field"
+        [(ngModel)]="patient.reasonForRegistration"
+        name="reasonForRegistration"
+        #reasonForRegistration="ngModel"
+        placeholder="e.g., Routine check-up"
+        maxlength="200"
+      ></textarea>
+      <div
+        class="alert"
+        *ngIf="reasonForRegistration.invalid && (reasonForRegistration.dirty || reasonForRegistration.touched)"
+      >
+        <div *ngIf="reasonForRegistration.errors?.['maxlength']">
+          Reason for registration cannot exceed 200 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="additionalNotes">Additional Notes:</label>
+      <textarea
+        id="additionalNotes"
+        class="field"
+        [(ngModel)]="patient.additionalNotes"
+        name="additionalNotes"
+        #additionalNotes="ngModel"
+        placeholder="e.g., Patient has mild allergies."
+        maxlength="200"
+      ></textarea>
+      <div
+        class="alert"
+        *ngIf="additionalNotes.invalid && (additionalNotes.dirty || additionalNotes.touched)"
+      >
+        <div *ngIf="additionalNotes.errors?.['maxlength']">
+          Additional notes cannot exceed 200 characters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="insuranceCompany">Insurance Company:</label>
+      <input
+        type="text"
+        id="insuranceCompany"
+        class="field"
+        [(ngModel)]="patient.insuranceCompany"
+        name="insuranceCompany"
+        #insuranceCompany="ngModel"
+        placeholder="Enter insurance company"
+        required
+        maxlength="100"
+      />
+      <div
+        class="alert"
+        *ngIf="insuranceCompany.invalid && (insuranceCompany.dirty || insuranceCompany.touched)"
+      >
+        <div *ngIf="insuranceCompany.errors?.['required']">
+          Insurance company is required.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="form-group">
+      <label for="insuranceID">Insurance ID:</label>
+      <input
+        type="text"
+        id="insuranceID"
+        class="field"
+        [(ngModel)]="patient.insuranceID"
+        name="insuranceID"
+        #insuranceID="ngModel"
+        placeholder="Enter insurance ID (e.g., H123456789)"
+        required
+        maxlength="10" 
+        pattern="^H\d{9}$" 
+      />
+      <div
+        class="alert"
+        *ngIf="insuranceID.invalid && (insuranceID.dirty || insuranceID.touched)"
+      >
+        <div *ngIf="insuranceID.errors?.['required']">
+          Insurance ID is required.
+        </div>
+        <div *ngIf="insuranceID.errors?.['pattern']">
+          Insurance ID must start with 'H' followed by 9 digits (e.g., H123456789).
+        </div>
+      
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="col">
+    <div class="form-group">
+      <label for="policyHolderFirstName">Policy Holder First Name:</label>
+      <input
+        type="text"
+        id="policyHolderFirstName"
+        class="field"
+        [(ngModel)]="patient.policyHolderFirstName"
+        name="policyHolderFirstName"
+        #policyHolderFirstName="ngModel"
+        placeholder="Enter policy holder first name"
+        required
+        maxlength="50"
+        pattern="[A-Za-z]+"
+      />
+      <div
+        class="alert"
+        *ngIf="policyHolderFirstName.invalid && (policyHolderFirstName.dirty || policyHolderFirstName.touched)"
+      >
+        <div *ngIf="policyHolderFirstName.errors?.['required']">
+          Policy holder first name is required.
+        </div>
+        <div *ngIf="policyHolderFirstName.errors?.['pattern']">
+          Policy holder first name must contain only letters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="policyHolderLastName">Policy Holder Last Name:</label>
+      <input
+        type="text"
+        id="policyHolderLastName"
+        class="field"
+        [(ngModel)]="patient.policyHolderLastName"
+        name="policyHolderLastName"
+        #policyHolderLastName="ngModel"
+        placeholder="Enter policy holder last name"
+        required
+        maxlength="10"
+        pattern="[A-Za-z]+"
+      />
+      <div
+        class="alert"
+        *ngIf="policyHolderLastName.invalid && (policyHolderLastName.dirty || policyHolderLastName.touched)"
+      >
+        <div *ngIf="policyHolderLastName.errors?.['required']">
+          Policy holder last name is required.
+        </div>
+        <div *ngIf="policyHolderLastName.errors?.['pattern']">
+          Policy holder last name must contain only letters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="form-group">
+      <label for="policyHolderDateOfBirth">Policy Holder Date of Birth:</label>
+      <input
+        type="date"
+        id="policyHolderDateOfBirth"
+        class="field"
+        [(ngModel)]="patient.policyHolderDateOfBirth"
+        name="policyHolderDateOfBirth"
+        #policyHolderDateOfBirth="ngModel"
+        required
+      />
+      <div
+        class="alert"
+        *ngIf="policyHolderDateOfBirth.invalid && (policyHolderDateOfBirth.dirty || policyHolderDateOfBirth.touched)"
+      >
+        <div *ngIf="policyHolderDateOfBirth.errors?.['required']">
+          Policy holder date of birth is required.
+        </div>
+      </div>
+    </div>
+  </div>
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
